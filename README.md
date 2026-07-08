@@ -1,4 +1,4 @@
-Digital Business Systems Analysis — Wal-Mart Inc.
+Digital Business Systems Analysis — WalMart Inc.
 ---
 
 ## 1. Introduction
