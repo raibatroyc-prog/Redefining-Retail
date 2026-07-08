@@ -84,13 +84,13 @@ Security vulnerabilities, data privacy regulations (such as GDPR), steep impleme
 
 ## 10. Recommendations
 
-2. Improve the identification of items that need improvement.3. Enhance the identification of improvement areas.
-Install smart shelves with the IoT technology.
+1. Improve the identification of items that need improvement.3. Enhance the identification of improvement areas.
+2. Install smart shelves with the IoT technology.
 3. Embrace AI Powered Demand Forecasting
 4. Implement computer vision based expiry/empty shelf detection
 5. Improve cyber security (MFA, monitoring)
 6. Continually train employees
-8. Improve supplier integration through cloud ERP.
+7. Improve supplier integration through cloud ERP.
 8. Automate to minimise manual inventory processes
 
 ## 11. Conclusion
