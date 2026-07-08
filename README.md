@@ -1,6 +1,4 @@
 Digital Business Systems Analysis — Wal-Mart Inc.
-This exam tests a student's understanding of Digital Business Systems (ECD223-3).
-
 ---
 
 ## 1. Introduction
@@ -16,6 +14,26 @@ Walmart was established in 1962 by Sam Walton in the USA state of Arkansas and c
 ## 3. Digital Business Ecosystem
 
 The technology layer (ERP, CRM, AI, cloud, inventory systems) connects suppliers, distribution centres, retail stores, digital platforms and customers in Walmart's ecosystem. Orders are processed and updated instantly throughout the inventory databases, warehouses, and reporting in management.
+
+```mermaid
+graph TD
+    subgraph SUPPLY["🏭 Supply Side"]
+        S1[Suppliers] --> S2[Distribution Centres] --> S3[Warehouses]
+    end
+    subgraph TECH["⚙️ Technology Layer"]
+        T1[ERP] & T2[Inventory Mgmt] & T3[AI Analytics] & T4[CRM]
+    end
+    subgraph RETAIL["🏪 Retail Side"]
+        R1[Stores] & R2[Website] & R3[Mobile App]
+    end
+    C1[👤 Customers]
+    S3 --> R1
+    T2 <--> S3
+    T3 --> T2
+    R1 <--> T2
+    R2 & R3 <--> T1
+    C1 --> R1 & R2 & R3
+```
 
 ## 4. Problem Statement
 
