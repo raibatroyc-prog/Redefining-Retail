@@ -1,6 +1,11 @@
 Digital Business Systems Analysis — WalMart Inc.
 ---
 
+## Logo for our Company: Redefining Retail
+
+<img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/f9a4e8dd-9a59-4ba8-bb26-494e166c5593" />
+
+
 ## 1. Introduction
 
 Digital technologies have revolutionized retail, now creating integrated systems that combine information, technology and communication, replacing manual methods. Business Information Systems (BIS) which include TPS, MIS, DSS, ERP, and CRM are crucial for retailers to handle the vast amount of data that is generated on a daily basis from sales, stock, and online orders.
