@@ -8,7 +8,7 @@ Digital Business Systems Analysis — WalMart Inc.
 
 ## 1. Introduction
 
-Digital technologies have revolutionized retail, now creating integrated systems that combine information, technology and communication, replacing manual methods. Business Information Systems (BIS) which include TPS, MIS, DSS, ERP, and CRM are crucial for retailers to handle the vast amount of data that is generated on a daily basis from sales, stock, and online orders.
+Digital technologies have revolutionized retail, now creating integrated systems that combine information, technology and communication, replacing manual methods. Business Information Systems (BIS) which include TPS, MIS, DSS, ERP, and CRM are crucial for retailers to handle the vast amount of data that is generated on a daily basis from sales, stock, and online orders. 
 
 Digital systems play a critical role in Walmart's operations, supporting inventory management, logistics, supply chain and customer data systems, which is a global retail giant. However, despite the investment in AI, cloud, big data and IoT, Walmart continues to experience inventory issues, including overstocking, stockouts, expiring products and manual checking of stock. This report begins with an analysis of Walmart's digital ecosystem, its application of information in decision making, its BIS, and introduces the AI based Smart Inventory Management System.
 
