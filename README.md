@@ -2,12 +2,19 @@
 
 **REDEFINING RETAIL**
 
-Smarter Stock. Smarter Retail.
+**Smarter Stock. Smarter Retail.**
+
 <img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/f9a4e8dd-9a59-4ba8-bb26-494e166c5593" />
+
 Eeshani Srivastava
-Raibat Roy Choudhury 
+
+Raibat Roy Choudhury
+
 Shrinjini Samanta
+
 Sujishnu Bhattacharya
+
+Thiruharan Keshavan Pillai
 
 ## 1. Introduction
 
@@ -47,22 +54,8 @@ graph TD
 
 With a vast number of stores, inventory management is challenging due to the variety of products, seasonal demand and the scale of the supply chain. The main problem areas are: Overstocking (storage costs, waste), stock shortages (lost sales), expiring products (financial/trust loss), manual checking (errors, inefficiency).
 
-## 5. Information & Decision-Making
 
-The DIKW model demonstrates the progression of raw data (such as barcode scans and transactions), through information (sales reports and alerts), to knowledge (demand patterns) to wisdom (stocking decisions and seasonal promotions). Good information must be accurate, timely, complete, consistent and reliable. TPS is used for operational decisions (restocking operations, scheduling operations); MIS/DSS is used for strategic decisions (opening new stores, investment in AI).
-
-## 6. Business Information Systems
-
-- **TPS**: Performs transactions on a daily basis (billing, returns, inventory updates).
-Reports: Convert TPS data into reports (sales, inventory, supplier performance).
-- DSS: Enables prediction, pricing and stocking decisions (e.g. forecasting the demand for umbrellas before the monsoon).
-- ERP: It helps all the processes of inventory, finance, HR, supply chain, and procurement in one system.
-CRM: Tracks customers to provide tailored recommendations and rewards.
-E-Business Platform: Website, app, Walmart+, delivery services all linked to all core systems.
-
-These systems continually communicate with one another — TPS to MIS, ERP to CRM and DSS to ERP — to facilitate coordinated, real-time operations.
-
-## 7. Workflow: Smart Inventory Management (Proposed)
+## 5. Workflow: Smart Inventory Management 
 
 ```mermaid
 flowchart TD
@@ -82,26 +75,71 @@ flowchart TD
 
 This means that RFID tags can be used to update stock automatically, sensors can be mounted on shelves to monitor levels, computer vision can alert staff when shelves are empty or when certain items are running out, AI can use past sales data as well as weather forecasts and events to predict what will be required and when, and when levels of stock are low, a purchase order is automatically sent to the supplier via ERP.
 
-## 8. Strategic Advantage
 
-Digital systems allow Wal-Mart to be competitive in pricing, retain its customers through CRM personalisation, automate manual tasks, grow and expand and run faster and more efficiently.
+<div align="center">
 
-## 9. Challenges
+<h2>📖 How to Use Redefining Retail</h2>
 
-Security vulnerabilities, data privacy regulations (such as GDPR), steep implementation expenses, employee training requirements, and integration with existing systems.
+<table>
+<tr>
+<td width="700">
 
-## 10. Recommendations
+<strong>Step 1: Access the System</strong><br>
+Open the Redefining Retail application and access the main dashboard to view the current inventory status and key stock information.
 
-1. Improve the identification of items that need improvement.3. Enhance the identification of improvement areas.
-2. Install smart shelves with the IoT technology.
-3. Embrace AI Powered Demand Forecasting
-4. Implement computer vision based expiry/empty shelf detection
-5. Improve cyber security (MFA, monitoring)
-6. Continually train employees
-7. Improve supplier integration through cloud ERP.
-8. Automate to minimise manual inventory processes
+<br>
 
-## 11. Conclusion
+<strong>Step 2: Monitor Inventory</strong><br>
+Use the inventory section to check available products, stock quantities, low-stock items, and products that require attention.
+
+<br>
+
+<strong>Step 3: Review Alerts</strong><br>
+Check alerts for low or out-of-stock products, expiring or expired products, items requiring restocking, and unusual inventory changes.
+
+<br>
+
+<strong>Step 4: Analyse Stock Information</strong><br>
+Use the dashboard and reports to review sales, inventory levels, and product performance to identify demand patterns, shortages, or overstocking.
+
+<br>
+
+<strong>Step 5: Take Action</strong><br>
+Restock products, remove expired items, or initiate purchase orders based on the alerts and insights provided.
+
+<br>
+
+<strong>Step 6: Use Predictive Insights</strong><br>
+Use AI-based predictions and historical sales data to anticipate demand and make better stocking decisions.
+
+<br>
+
+<strong>Step 7: Maintain Accurate Data</strong><br>
+Regularly update inventory and transaction information to ensure accurate reports, alerts, and recommendations.
+
+</td>
+</tr>
+</table>
+
+</div>
+
+
+
+**Quick Workflow**
+
+```mermaid
+flowchart TD
+    A[Access Dashboard] --> B[Check Inventory]
+    B --> C[Review Alerts]
+    C --> D[Analyse Data]
+    D --> E[Take Action]
+    E --> F[Monitor Results]
+```
+
+The system is intended to reduce manual inventory checking, minimise stockouts and overstocking, and support faster, data-driven retail decisions.
+
+
+## 6. Conclusion
 
 Digital Business Systems are vital to Walmart's business operations and are made up of TPS, MIS, DSS, CRM, ERP, AI, and cloud computing. Despite being a frontrunner in retail technology, Walmart still encounters inventory problems, including overstocking, stock outages, expiration, and manual inventory checks, which can be mitigated by implementing a proposed Smart Inventory Management System using RFID, IoT, Computer Vision and Predictive Analytics. This digital change provides a more efficient organization, lowers costs, and enables a long-term competitive edge.
 
