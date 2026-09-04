@@ -1,6 +1,6 @@
 
 
-Redefining Retail
+*Redefining Retail*
 
 <img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/f9a4e8dd-9a59-4ba8-bb26-494e166c5593" />
 
