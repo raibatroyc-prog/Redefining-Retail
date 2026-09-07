@@ -14,7 +14,7 @@ Shrinjini Samanta
 
 Sujishnu Bhattacharya
 
-Thiruharan Keshavan Pillai
+Thiruharan Kesavan Pillai
 
 ## 1. Introduction
 
