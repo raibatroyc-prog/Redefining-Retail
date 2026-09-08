@@ -7,20 +7,27 @@ import { Loader2 } from "lucide-react";
 import { useCurrentOrg } from "@/hooks/use-current-org";
 import { useProducts } from "@/hooks/use-products";
 import { rootRoute } from "@/routeTree.gen";
+import { AgentAssistant } from "@/components/agent-assistant";
 
 export const inventoryRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/_authenticated/inventory",
+  path: "/inventory",
   component: InventoryPage,
 });
 
 function InventoryPage() {
-  const { organizationId } = useCurrentOrg();
+  const { organizationId, isAuthenticated } = useCurrentOrg();
   const productsQuery = useProducts(organizationId);
   const products = useMemo(() => productsQuery.data ?? [], [productsQuery.data]);
 
   return (
     <AppShell>
+      <Panel>
+        <AgentAssistant
+          organizationId={organizationId}
+          isAuthenticated={isAuthenticated}
+        />
+      </Panel>
       <Panel>
         <h2>Inventory</h2>
         {productsQuery.isLoading && <Loader2 aria-label="Loading inventory" />}

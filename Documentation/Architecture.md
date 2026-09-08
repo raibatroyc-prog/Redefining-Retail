@@ -116,6 +116,21 @@ Environment variables for the agent runtime include:
 
 The agent returns structured error objects for malformed requests, configuration issues, provider failures, and timeout conditions. Successful responses remain in the `data` envelope while failures use the `error` envelope without exposing stack traces or provider internals.
 
+### Phase 4B.5 frontend assistant
+
+The authenticated inventory route presents a read-only assistant component that
+calls `POST /api/agent/query`. It obtains the current Supabase access token at
+request time and sends the selected organization only as an `x-org-id` routing
+hint. The backend remains authoritative for authentication, organization
+membership, tenant isolation, specialist selection, and tool permissions.
+
+The frontend sends only the user message in the JSON body. It never receives
+the server-side OpenAI or Supabase service-role credentials, and it renders
+assistant output as plain text. No inventory or supplier records are changed,
+no purchase orders are created, and recommendations require human action.
+Phase 4B.5 keeps assistant state transient and does not introduce persistent
+chat memory or database storage.
+
 ### Storage
 
 If the application stores product images or uploaded files, *Supabase Storage* can be used.

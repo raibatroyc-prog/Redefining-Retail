@@ -148,3 +148,16 @@ Logging and safety:
 
 - Structured audit metadata includes requestId, intent, specialist selection, duration, and execution status.
 - Secrets, tokens, raw authorization headers, and provider internals are not included in logs or API responses.
+
+## Frontend inventory assistant
+
+The authenticated inventory page includes a read-only assistant backed by
+`POST /api/agent/query`. The browser sends the current Supabase access token and
+the selected organization as an `x-org-id` routing hint; backend authentication
+and organization membership checks remain authoritative.
+
+OpenAI configuration is server-only and is never sent to the frontend. The
+assistant does not change inventory or supplier records, create purchase orders,
+or communicate with external systems. Recommendations require human action.
+Phase 4B.5 keeps assistant state transient in the browser and does not add
+persistent chat memory.
