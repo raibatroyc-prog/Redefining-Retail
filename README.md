@@ -78,7 +78,7 @@ This means that RFID tags can be used to update stock automatically, sensors can
 
 <div align="center">
 
-<h2>📖 How to Use Redefining Retail</h2>
+<h2> How to Use Redefining Retail</h2>
 
 <table>
 <tr>
