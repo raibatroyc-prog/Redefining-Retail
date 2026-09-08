@@ -90,7 +90,7 @@ The interface was reviewed and improved for usability, consistency and responsiv
 The application was deployed and published as a live web application.
 
 **Current published application:**
-[[https://smart-stock-savvy-47.lovable.app](https://smart-stock-savvy-47.lovable.app)](https://smart-stock-savvy-47.lovable.app)
+https://smart-stock-savvy-47.lovable.app
 
 ### T016 — Cloud Architecture
 
