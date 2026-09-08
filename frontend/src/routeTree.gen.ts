@@ -6,6 +6,8 @@ import { indexRoute } from "./routes";
 import { authenticatedRoute } from "./routes/_authenticated";
 import { dashboardRoute } from "./routes/_authenticated/dashboard";
 import { loginRoute } from "./routes/login";
+import { suppliersRoute } from "./routes/_authenticated/suppliers";
+import { supplierDetailRoute } from "./routes/_authenticated/suppliers.$supplierId";
 
 // Route files in src/routes are the source of truth for app structure.
 // This checked-in tree is intentionally kept in sync with the route definitions
@@ -20,5 +22,11 @@ export const rootRoute = createRootRouteWithContext<RouterContext>()();
 export const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
-  authenticatedRoute.addChildren([dashboardRoute, inventoryRoute, productDetailRoute]),
+  authenticatedRoute.addChildren([
+    dashboardRoute,
+    inventoryRoute,
+    productDetailRoute,
+    suppliersRoute,
+    supplierDetailRoute,
+  ]),
 ]);
