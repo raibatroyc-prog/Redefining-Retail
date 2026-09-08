@@ -105,6 +105,17 @@ Possible authentication mechanisms include:
 
 The exact authentication providers enabled depend on the project's Supabase configuration.
 
+### Agent safety and production controls
+
+The read-only agent layer is intentionally constrained to prevent autonomous inventory or purchasing actions. The agent API enforces server-authoritative organization context, rejects empty or oversized messages, and limits model execution to fixed specialists and bounded turns.
+
+Environment variables for the agent runtime include:
+
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL` (default `gpt-4o-mini`)
+
+The agent returns structured error objects for malformed requests, configuration issues, provider failures, and timeout conditions. Successful responses remain in the `data` envelope while failures use the `error` envelope without exposing stack traces or provider internals.
+
 ### Storage
 
 If the application stores product images or uploaded files, *Supabase Storage* can be used.

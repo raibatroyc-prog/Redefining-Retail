@@ -13,6 +13,7 @@ import {
 import type {
   Database,
 } from "../types/database.types";
+import { getServerConfig } from "../config";
 
 
 function isNewSupabaseApiKey(
@@ -113,25 +114,7 @@ export const attachSupabaseAuth =
   }).server(
     async ({ next }) => {
 
-      const SUPABASE_URL =
-        process.env.SUPABASE_URL;
-
-
-      const SUPABASE_PUBLISHABLE_KEY =
-        process.env
-          .SUPABASE_PUBLISHABLE_KEY;
-
-
-      if (
-        !SUPABASE_URL ||
-        !SUPABASE_PUBLISHABLE_KEY
-      ) {
-
-        throw new Error(
-          "Missing Supabase environment variables."
-        );
-
-      }
+      const config = getServerConfig();
 
 
       const request =
@@ -193,15 +176,15 @@ export const attachSupabaseAuth =
 
       const supabase =
         createClient<Database>(
-          SUPABASE_URL,
-          SUPABASE_PUBLISHABLE_KEY,
+          config.supabaseUrl,
+          config.supabasePublishableKey,
           {
 
             global: {
 
               fetch:
                 createSupabaseFetch(
-                  SUPABASE_PUBLISHABLE_KEY
+                  config.supabasePublishableKey
                 ),
 
               headers: {

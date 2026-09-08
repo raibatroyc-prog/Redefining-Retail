@@ -1,5 +1,7 @@
 import "./utils/error-capture";
 
+import { handleApiRequest } from "./api/routes/index";
+
 import {
   consumeLastCapturedError,
 } from "./utils/error-capture";
@@ -159,6 +161,11 @@ export default {
   ) {
 
     try {
+
+      const url = new URL(request.url);
+      if (url.pathname.startsWith("/api/")) {
+        return handleApiRequest(request);
+      }
 
       const handler =
         await getServerEntry();
