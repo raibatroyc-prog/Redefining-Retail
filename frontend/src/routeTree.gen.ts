@@ -8,6 +8,8 @@ import { dashboardRoute } from "./routes/_authenticated/dashboard";
 import { loginRoute } from "./routes/login";
 import { suppliersRoute } from "./routes/_authenticated/suppliers";
 import { supplierDetailRoute } from "./routes/_authenticated/suppliers.$supplierId";
+import { purchaseOrdersRoute } from "./routes/_authenticated/purchase-orders";
+import { purchaseOrderDetailRoute } from "./routes/_authenticated/purchase-orders.$purchaseOrderId";
 
 // Route files in src/routes are the source of truth for app structure.
 // This checked-in tree is intentionally kept in sync with the route definitions
@@ -28,5 +30,7 @@ export const routeTree = rootRoute.addChildren([
     productDetailRoute,
     suppliersRoute,
     supplierDetailRoute,
+    purchaseOrdersRoute,
+    purchaseOrderDetailRoute,
   ]),
 ]);
