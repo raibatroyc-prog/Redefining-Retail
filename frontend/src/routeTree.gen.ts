@@ -1,7 +1,11 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext } from "@tanstack/react-router";
 import { inventoryRoute } from "./routes/_authenticated/inventory";
+import { productDetailRoute } from "./routes/_authenticated/inventory.$productId";
 import { indexRoute } from "./routes";
+import { authenticatedRoute } from "./routes/_authenticated";
+import { dashboardRoute } from "./routes/_authenticated/dashboard";
+import { loginRoute } from "./routes/login";
 
 // Route files in src/routes are the source of truth for app structure.
 // This checked-in tree is intentionally kept in sync with the route definitions
@@ -13,4 +17,8 @@ export interface RouterContext {
 
 export const rootRoute = createRootRouteWithContext<RouterContext>()();
 
-export const routeTree = rootRoute.addChildren([indexRoute, inventoryRoute]);
+export const routeTree = rootRoute.addChildren([
+  indexRoute,
+  loginRoute,
+  authenticatedRoute.addChildren([dashboardRoute, inventoryRoute, productDetailRoute]),
+]);

@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 export interface CurrentOrgState {
   userId: string | null;
   organizationIds: string[];
+  organizations: Array<{ id: string; name: string; role: string }>;
   organizationId: string | null;
   isAuthenticated: boolean;
 }
@@ -41,6 +42,7 @@ export function useCurrentOrg() {
         return {
           userId: null,
           organizationIds: [],
+          organizations: [],
           organizationId: null,
           isAuthenticated: false,
         };
@@ -60,13 +62,14 @@ export function useCurrentOrg() {
         return {
           userId: null,
           organizationIds: [],
+          organizations: [],
           organizationId: null,
           isAuthenticated: false,
         };
       }
 
       const [membershipsResult, profileResult] = await Promise.all([
-        supabase.from("org_members").select("org_id").eq("user_id", userId),
+        supabase.from("org_members").select("org_id, role").eq("user_id", userId),
         supabase.from("profiles").select("current_org_id").eq("id", userId).maybeSingle(),
       ]);
 
@@ -81,6 +84,21 @@ export function useCurrentOrg() {
       const organizationIds = (membershipsResult.data ?? [])
         .map((membership) => membership.org_id)
         .filter(Boolean);
+      const organizationDetails = await supabase
+        .from("organizations")
+        .select("id, name")
+        .in("id", organizationIds);
+
+      if (organizationDetails.error) {
+        throw organizationDetails.error;
+      }
+
+      const organizations = (membershipsResult.data ?? []).map((membership) => ({
+        id: membership.org_id,
+        name: organizationDetails.data?.find((organization) => organization.id === membership.org_id)?.name
+          ?? membership.org_id,
+        role: membership.role,
+      }));
 
       const organizationId = resolveOrganizationSelection({
         userId,
@@ -91,6 +109,7 @@ export function useCurrentOrg() {
       return {
         userId,
         organizationIds: [...new Set(organizationIds)],
+        organizations,
         organizationId,
         isAuthenticated: true,
       };
@@ -101,8 +120,21 @@ export function useCurrentOrg() {
     userId: query.data?.userId ?? null,
     organizationId: query.data?.organizationId ?? null,
     organizationIds: query.data?.organizationIds ?? [],
+    organizations: query.data?.organizations ?? [],
     isAuthenticated: query.data?.isAuthenticated ?? false,
     isLoading: query.isLoading,
     error: query.error instanceof Error ? query.error : null,
+    selectOrganization: async (nextOrganizationId: string) => {
+      if (!supabase || !query.data?.userId || !query.data.organizationIds.includes(nextOrganizationId)) {
+        return false;
+      }
+      const { error } = await supabase
+        .from("profiles")
+        .update({ current_org_id: nextOrganizationId })
+        .eq("id", query.data.userId);
+      if (error) throw error;
+      await query.refetch();
+      return true;
+    },
   };
 }

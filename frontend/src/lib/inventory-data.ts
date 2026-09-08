@@ -19,6 +19,8 @@ export interface Product {
   last_received: string | null;
   unit_cost: number;
   supplier_id: string | null;
+  status?: StockStatus;
+  isExpiring?: boolean;
 }
 
 export interface Supplier {
