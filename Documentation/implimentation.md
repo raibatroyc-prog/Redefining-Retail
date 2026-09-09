@@ -24,8 +24,8 @@ This document records the significant development tasks undertaken during the im
 | T016    | Prepare cloud deployment architecture for large-scale usage | Cloud Architecture     | Completed   | 25 Aug         | Yes           | architecture.md                        |
 | T017    | Document current architecture and proposed AWS architecture | Documentation          | Completed   | 25 Aug         | Yes           | architecture.md                        |
 | T018    | Final system testing and verification                       | Testing                | Completed   | 25 Aug         | Yes           | Final published application            |
-| T019    | Review remaining issues and improvements                    | Testing/QA             | In Progress | —              | Yes           | Issue list / project review            |
-| T020    | Final documentation and submission preparation              | Documentation          | In Progress | —              | Yes           | Project documentation                  |
+| T019    | Review remaining issues and improvements                    | Testing/QA             | Completed   | 2026-09     | Yes           | Phase 5.6 hardening review             |
+| T020    | Final documentation and submission preparation              | Documentation          | Completed   | 2026-09     | Yes           | Current repository documentation       |
 
 ## Work Log Details
 
@@ -106,11 +106,15 @@ The team participated in final testing of the completed application using the pu
 
 ### T019 — Remaining Issues
 
-The application is being reviewed for remaining bugs, technical issues and possible improvements before final submission.
+Phase 5.6 completed the scoped review of low-stock filtering, product supplier
+display, organization query-cache transitions, regression coverage, and
+documentation. Browser automation, production monitoring, and deployment
+hardening remain future work.
 
 ### T020 — Final Documentation
 
-The team is contributing to the required project documentation, architecture documentation, implementation log and final submission materials.
+The README, architecture document, and this implementation log now describe
+the current repository while retaining the earlier project history.
 
 ## AI Assistance Record
 
@@ -133,6 +137,64 @@ Evidence for completed tasks should be linked to the corresponding Git commit, p
 
 For final submission, replace generic evidence descriptions above with the actual Git commit IDs, screenshots or other verifiable evidence available from the project.
 
+## Phase 4B and Phase 5 History
+
+### Phase 4B.4 — Agent reliability and safety
+
+Completed fixed intent routing, fixed specialists/tools, bounded specialist
+execution and model turns, request IDs, timeouts, input/output limits,
+grounding, redaction, prompt-injection handling, deterministic fallback, and
+read-only action policy. No autonomous purchasing, arbitrary SQL, dynamic
+agents/tools, or external communication was introduced.
+
+### Phase 4B.5 — Authenticated assistant UX
+
+Completed the protected, transient AgentAssistant on the authenticated
+inventory page. It sends the current access token and organization routing
+hint to `POST /api/agent/query`; server authentication and membership checks
+remain authoritative. It does not mutate records, create purchase orders,
+communicate externally, or persist agent memory.
+
+### Phase 5.1 — Authenticated application shell
+
+Completed login, protected TanStack Router parent, dashboard route,
+navigation, session handling, organization selection, and the shared
+authenticated read-only API client.
+
+### Phase 5.2 — Dashboard intelligence
+
+Completed authenticated inventory summary and deterministic recommendation
+views with freshness and limitation messaging.
+
+### Phase 5.3 — Inventory experience
+
+Completed backend-backed inventory filters and pagination, product detail,
+product links, and read-only stock-movement history.
+
+### Phase 5.4 — Supplier experience
+
+Completed read-only supplier list/detail routes using supported search and
+pagination. Contact information is display-only.
+
+### Phase 5.5 — Purchase-order experience
+
+Completed read-only purchase-order list/detail routes with supported
+pagination, suppliers, and returned line-item information. No PO mutation,
+approval, receiving, or supplier communication workflow was added.
+
+### Phase 5.6 — Read-only hardening
+
+Completed low-stock filter precedence correction and focused tests, product
+detail supplier rendering with safe fallback, organization-scoped query-cache
+removal during switching, and documentation synchronization. No browser test
+framework exists in the repository, so authenticated browser acceptance
+remains a deployment-time gap.
+
 ## Current Project Status
 
-The core Smart Stock Savvy application has been implemented and published. The major frontend, inventory-management, integration, deployment and documentation components have been completed. Final issue review and submission preparation remain in progress. 
+The current repository contains the authenticated, read-only Phase 5
+operational experience and bounded Phase 4B agent functionality. Earlier
+Lovable publication and proposed AWS architecture remain historical/project
+planning records, not claims that those deployment systems are configured in
+this repository. Future work includes browser automation, observability,
+rate limiting, deployment configuration, and backup/restore procedures.

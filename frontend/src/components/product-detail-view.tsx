@@ -3,8 +3,17 @@ import { StatusPill, StockBar } from "@/components/ui-parts";
 
 const unavailable = "Unavailable";
 
+export function getSupplierDisplay(product: Product): { name: string; category: string } {
+  const supplier = product.suppliers;
+  return {
+    name: supplier?.name || product.supplier_id || unavailable,
+    category: supplier?.category || unavailable,
+  };
+}
+
 export function ProductDetailView({ product }: { product: Product }) {
   const expiry = product.expires_at ? new Date(product.expires_at).toLocaleString() : unavailable;
+  const supplier = getSupplierDisplay(product);
   return (
     <section aria-labelledby="product-detail-heading">
       <h1 id="product-detail-heading">{product.name || unavailable}</h1>
@@ -21,7 +30,8 @@ export function ProductDetailView({ product }: { product: Product }) {
         <div><dt>Unit cost</dt><dd>{product.unit_cost ?? unavailable}</dd></div>
         <div><dt>Status</dt><dd>{product.status ? <StatusPill status={product.status} /> : unavailable}</dd></div>
         <div><dt>Expiring soon</dt><dd>{product.isExpiring === undefined ? unavailable : product.isExpiring ? "Yes" : "No"}</dd></div>
-        <div><dt>Supplier ID</dt><dd>{product.supplier_id || unavailable}</dd></div>
+        <div><dt>Supplier</dt><dd>{supplier.name}</dd></div>
+        <div><dt>Supplier category</dt><dd>{supplier.category}</dd></div>
       </dl>
       <StockBar stock={product.stock} capacity={product.capacity} />
     </section>

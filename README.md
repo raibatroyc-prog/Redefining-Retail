@@ -1,15 +1,42 @@
 # Smart Stock Savvy
 
 Smart Stock Savvy is a React/TypeScript inventory management foundation for
-organization-scoped retail data. The current repository includes inventory,
-stock movement, supplier, purchase-order, simulation, and Supabase security
-building blocks. AI agents and production forecasting are future phases.
+organization-scoped retail data. The current repository includes an
+authenticated, read-only operational experience for inventory, stock
+movements, suppliers, purchase orders, simulation, Supabase security, bounded
+agent assistance, and deterministic intelligence.
 
 ## Architecture
 
 - `frontend/src`: Vite React UI, TanStack Router/Query, and pure inventory calculations.
 - `backend`: TypeScript services and TanStack Start middleware.
 - `database`: Supabase PostgreSQL schema, RLS policies, triggers, functions, and seed data.
+
+## Current authenticated application
+
+The protected application uses a TanStack Router authenticated parent and
+Supabase Auth. The current organization selector only offers memberships
+returned for the signed-in user; backend membership checks and RLS remain
+authoritative. Available routes include:
+
+- `/login`
+- `/dashboard` for inventory summaries, freshness, deterministic
+  recommendations, and limitation notices
+- `/inventory` and `/inventory/$productId` for inventory, product details,
+  returned supplier information, and read-only stock movements
+- `/suppliers` and `/suppliers/$supplierId` for read-only supplier views
+- `/purchase-orders` and `/purchase-orders/$purchaseOrderId` for read-only
+  purchase-order views and line items
+
+The shared authenticated API client sends the current Supabase access token
+and organization routing context. Domain React Query keys include the
+organization ID, and previous-organization caches are removed while switching
+organizations.
+
+Phase 5 is intentionally read-only. The frontend does not expose product,
+inventory, stock, supplier, or purchase-order creation, editing, deletion,
+approval, cancellation, receiving, stock adjustment, contact, email, or
+messaging workflows. Recommendations require human action.
 
 ## Prerequisites
 
@@ -101,6 +128,11 @@ risk evaluation is also a risk signal, not a measure of supplier reliability.
 This layer does not call LLMs, mutate data, or create autonomous workflows. It is
 meant to support human-in-the-loop decision support and future agent-ready APIs.
 
+The intelligence layer is implemented, but its outputs remain limited:
+forecasting is a deterministic demand proxy rather than historical-sales or
+ML forecasting; confidence and stockout probability are heuristic signals, not
+calibrated probabilities.
+
 ## Verification
 
 ```sh
@@ -109,6 +141,10 @@ npm test
 npm run build
 npm run build:backend
 ```
+
+The repository contains focused contract, agent-safety, intelligence, and
+Phase 5 regression tests. No browser automation framework or production
+deployment/monitoring/backup configuration is included yet.
 
 The database scripts are applied through the Supabase SQL editor or Supabase
 CLI in migration order. See `database/README.md` for seed guidance.

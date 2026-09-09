@@ -70,6 +70,37 @@ function toInventoryItem(product: Record<string, unknown>) {
   };
 }
 
+export function matchesInventoryFilters(
+  product: Record<string, unknown>,
+  filters: {
+    status?: string | null;
+    category?: string | null;
+    lowStock?: boolean;
+    expiring?: boolean;
+    search?: string;
+  },
+): boolean {
+  const status = productStatus(product as {
+    stock: number;
+    capacity: number;
+    demand_trend?: number | null;
+  });
+
+  if (filters.status && status !== filters.status) return false;
+  if (filters.category && product.department !== filters.category) return false;
+  if (filters.lowStock === true && status !== "low" && status !== "critical") return false;
+  if (filters.lowStock === false && (status === "low" || status === "critical")) return false;
+  if (filters.expiring === true && !isExpiring(product as { expires_at?: string | null })) return false;
+  if (filters.expiring === false && isExpiring(product as { expires_at?: string | null })) return false;
+  if (!matchesSearch(product as {
+    name?: string | null;
+    sku?: string | null;
+    brand?: string | null;
+    department?: string | null;
+  }, filters.search ?? "")) return false;
+  return true;
+}
+
 export function createInventoryController(deps: InventoryControllerDependencies = {}) {
   const listProductsFn = deps.listProducts ?? getProducts;
   const getProductByIdFn = deps.getProductById ?? getProduct;
@@ -103,16 +134,13 @@ export function createInventoryController(deps: InventoryControllerDependencies 
       const offset = parseInteger(url.searchParams.get("offset"), 0, 10_000);
 
       const products = await listProductsFn(resolvedOrgId);
-      const filtered = products.filter((product) => {
-        if (status && productStatus(product as any) !== status) return false;
-        if (category && product.department !== category) return false;
-        if (lowStock === true && productStatus(product as any) !== "low" && productStatus(product as any) !== "critical") return false;
-        if (lowStock === false && productStatus(product as any) === "low" || productStatus(product as any) === "critical") return false;
-        if (expiring === true && !isExpiring(product as any)) return false;
-        if (expiring === false && isExpiring(product as any)) return false;
-        if (!matchesSearch(product as any, search)) return false;
-        return true;
-      });
+      const filtered = products.filter((product) => matchesInventoryFilters(product, {
+        status,
+        category,
+        lowStock: lowStock ?? undefined,
+        expiring: expiring ?? undefined,
+        search,
+      }));
 
       const page = filtered.slice(offset, offset + limit);
       return new Response(

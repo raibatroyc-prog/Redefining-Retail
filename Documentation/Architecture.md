@@ -1,5 +1,13 @@
 # Smart Stock Savvy — System Architecture
 
+> **Documentation status:** This document retains the original business,
+> database, deployment, scalability, and work-allocation material below for
+> historical context. The current repository implementation is documented in
+> the "Current repository architecture" section near the end. Sections that
+> describe Lovable publication, product mutations, or AWS services are
+> historical/proposed material and are not claims that those systems are
+> configured in this repository.
+
 ## 1. Business Problem and Target Users
 
 ### Business Problem
@@ -1111,6 +1119,114 @@ The project work is divided among the five students as follows:
 - Document high-availability, monitoring and deployment considerations.
 - Assist with performance, scalability and infrastructure-related testing.
 - Ensure the final technical documentation accurately reflects the implemented system.
+
+---
+
+# 24. Current Repository Architecture
+
+This section is authoritative for the current checked-out implementation.
+
+## Frontend and authenticated routes
+
+The frontend is a Vite React/TypeScript application using TanStack Router and
+TanStack Query. `frontend/src/routes/_authenticated.tsx` is the pathless
+authenticated parent. Its route guard requires a Supabase session and
+redirects signed-out users to `/login`. `AppShell` provides navigation,
+organization selection, and session status.
+
+Current routes are:
+
+- `/login`
+- `/dashboard`
+- `/inventory`
+- `/inventory/$productId`
+- `/suppliers`
+- `/suppliers/$supplierId`
+- `/purchase-orders`
+- `/purchase-orders/$purchaseOrderId`
+
+The dashboard uses the inventory summary and deterministic recommendation
+APIs. Inventory includes backend-supported filters, pagination, product detail,
+and stock-movement history. Supplier and purchase-order routes are read-only
+list/detail experiences. The inventory route also contains the transient
+read-only AgentAssistant.
+
+## Shared API client and query cache
+
+`frontend/src/lib/api-client.ts` obtains the current Supabase access token at
+request time, sends `Authorization` and `x-org-id`, appends `organizationId`
+as routing context, performs authenticated GET requests, parses response
+envelopes, and normalizes session, network, malformed-response, and API
+errors. The agent endpoint is the intentional POST exception and accepts only
+a bounded user message.
+
+Phase 5 domain hooks use `retry: false` and organization-aware React Query
+keys. During an organization switch, previous-organization domain query
+caches are removed and domain queries are disabled until the newly selected
+organization has been reloaded. The new organization then fetches under its
+own keys. This cache behavior improves tenant-data hygiene but does not
+replace backend authorization.
+
+## Backend API boundaries
+
+The current authenticated read APIs are:
+
+- `GET /api/me`
+- `GET /api/organizations/:organizationId`
+- `GET /api/inventory`
+- `GET /api/inventory/:productId`
+- `GET /api/inventory/:productId/movements`
+- `GET /api/suppliers`
+- `GET /api/suppliers/:supplierId`
+- `GET /api/purchase-orders`
+- `GET /api/purchase-orders/:purchaseOrderId`
+- `GET /api/reports/inventory-summary`
+- `GET /api/intelligence/inventory-recommendations`
+
+The inventory list supports `status`, `category`, `lowStock`, `expiring`,
+`search`, `limit`, and `offset`. Suppliers support `search`, `limit`, and
+`offset`; purchase orders support `limit` and `offset`. Controllers require
+authentication, validate identifiers, authorize organization membership, and
+verify resource ownership.
+
+## Supabase Auth, RLS, and organization isolation
+
+Supabase Auth supplies the browser session. The organization selector only
+offers memberships returned for the authenticated user. The selected
+organization is routing context, never the authorization boundary. Backend
+membership checks remain authoritative, and Supabase RLS policies scope
+organizations, profiles, memberships, products, suppliers, stock movements,
+purchase orders, and purchase-order items to authorized organization context.
+
+## Deterministic intelligence and agent safety
+
+`backend/intelligence/` contains pure, deterministic forecasting-proxy,
+inventory-risk, reorder, supplier-evaluation, recommendation, and reporting
+logic. Forecast confidence and stockout probability are heuristic signals,
+not calibrated probabilities; insufficient data and limitations are surfaced.
+
+The Phase 4B agent runtime uses fixed intent categories, fixed specialists and
+tools, grounded evidence, deterministic fallback, redaction, request IDs,
+timeouts, and input/output limits. `MAX_SPECIALIST_EXECUTIONS` is 3 and model
+turns are bounded. Mutation, destructive, autonomous-purchasing, arbitrary
+SQL, dynamic-agent, dynamic-tool, and external-communication behavior is not
+available. AgentAssistant state is transient and read-only.
+
+## Explicit Phase 5 boundary
+
+Phase 5 frontend routes do not expose product, inventory, stock, supplier, or
+purchase-order creation, editing, deletion, approval, cancellation, receiving,
+stock adjustment, supplier contact, email, or messaging workflows. Backend
+service functions and database write policies may exist for separately
+approved future operational workflows; they are not part of the current
+Phase 5 UI.
+
+## Future recommendations
+
+The repository does not currently include browser automation, production error
+tracking, dedicated rate limiting, deployment configuration, or backup/restore
+automation. These are future production-readiness recommendations, not
+implemented architecture components.
 
 ## 5. Shrinjini — Testing / UI-UX / Documentation / Quality Assurance
 - Test the complete application workflow from login through inventory operations and stock requests.

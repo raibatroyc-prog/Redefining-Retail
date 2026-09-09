@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, type QueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface CurrentOrgState {
@@ -7,6 +8,12 @@ export interface CurrentOrgState {
   organizations: Array<{ id: string; name: string; role: string }>;
   organizationId: string | null;
   isAuthenticated: boolean;
+}
+
+export function removeOrganizationScopedQueries(queryClient: QueryClient, organizationId: string): void {
+  queryClient.removeQueries({
+    predicate: (query) => query.queryKey[1] === organizationId,
+  });
 }
 
 export function resolveOrganizationSelection({
@@ -32,6 +39,8 @@ export function resolveOrganizationSelection({
 }
 
 export function useCurrentOrg() {
+  const queryClient = useQueryClient();
+  const [isSwitchingOrganization, setIsSwitchingOrganization] = useState(false);
   const query = useQuery<CurrentOrgState>({
     queryKey: ["current-org"],
     enabled: Boolean(supabase),
@@ -105,7 +114,6 @@ export function useCurrentOrg() {
         organizationIds,
         preferredOrganizationId: profileResult.data?.current_org_id ?? null,
       });
-
       return {
         userId,
         organizationIds: [...new Set(organizationIds)],
@@ -118,23 +126,41 @@ export function useCurrentOrg() {
 
   return {
     userId: query.data?.userId ?? null,
-    organizationId: query.data?.organizationId ?? null,
+    organizationId: isSwitchingOrganization ? null : query.data?.organizationId ?? null,
     organizationIds: query.data?.organizationIds ?? [],
     organizations: query.data?.organizations ?? [],
     isAuthenticated: query.data?.isAuthenticated ?? false,
     isLoading: query.isLoading,
+    isSwitchingOrganization,
     error: query.error instanceof Error ? query.error : null,
     selectOrganization: async (nextOrganizationId: string) => {
       if (!supabase || !query.data?.userId || !query.data.organizationIds.includes(nextOrganizationId)) {
         return false;
       }
-      const { error } = await supabase
-        .from("profiles")
-        .update({ current_org_id: nextOrganizationId })
-        .eq("id", query.data.userId);
-      if (error) throw error;
-      await query.refetch();
-      return true;
+      const previousOrganizationId = query.data.organizationId;
+      setIsSwitchingOrganization(true);
+      if (previousOrganizationId) {
+        removeOrganizationScopedQueries(queryClient, previousOrganizationId);
+      }
+      try {
+        const { error } = await supabase
+          .from("profiles")
+          .update({ current_org_id: nextOrganizationId })
+          .eq("id", query.data.userId);
+        if (error) throw error;
+        const refreshed = await query.refetch();
+        if (refreshed.error) {
+          throw refreshed.error;
+        }
+        return true;
+      } catch (error) {
+        queryClient.setQueryData<CurrentOrgState>(["current-org"], (current) => (
+          current ? { ...current, organizationId: null } : current
+        ));
+        throw error;
+      } finally {
+        setIsSwitchingOrganization(false);
+      }
     },
   };
 }
