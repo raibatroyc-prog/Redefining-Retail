@@ -5,34 +5,17 @@ import {
 import type {
   Database,
 } from "../types/database.types";
+import { getServerConfig } from "../config";
 
 
 function createSupabaseAdminClient() {
 
-  const SUPABASE_URL =
-    process.env.SUPABASE_URL;
-
-
-  const SUPABASE_SERVICE_ROLE_KEY =
-    process.env
-      .SUPABASE_SERVICE_ROLE_KEY;
-
-
-  if (
-    !SUPABASE_URL ||
-    !SUPABASE_SERVICE_ROLE_KEY
-  ) {
-
-    throw new Error(
-      "Missing Supabase server environment variables."
-    );
-
-  }
+  const config = getServerConfig();
 
 
   return createClient<Database>(
-    SUPABASE_URL,
-    SUPABASE_SERVICE_ROLE_KEY,
+    config.supabaseUrl,
+    config.supabaseServiceRoleKey,
     {
 
       auth: {

@@ -4,6 +4,10 @@ import {
 } from "@tanstack/react-start";
 
 import {
+  ApiError,
+} from "./api/request-context";
+
+import {
   renderErrorPage,
 } from "./utils/error-page";
 
@@ -21,6 +25,21 @@ const errorMiddleware =
         return await next();
 
       } catch (error) {
+
+        if (error instanceof ApiError) {
+          return new Response(
+            JSON.stringify({
+              error: error.message,
+              details: error.details,
+            }),
+            {
+              status: error.statusCode,
+              headers: {
+                "content-type": "application/json; charset=utf-8",
+              },
+            }
+          );
+        }
 
         if (
           error !== null &&
