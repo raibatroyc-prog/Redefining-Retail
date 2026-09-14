@@ -1,65 +1,67 @@
 # Smart Stock Savvy — Project Implementation Work Log
 
-This document records the significant development tasks undertaken during the implementation of the Smart Stock Savvy inventory management system.
+This document records the significant development tasks undertaken during the implementation of the Smart Stock Savvy inventory management system. It is the group's single, authoritative work log and contribution record, per the CIA-III brief (Section 8).
 
 ## Implementation Work Log
 
-| Task ID | Task                                                                           | Component              | Status      | Date Completed | AI Assistance | Evidence                                                     |
-| ------- | ------------------------------------------------------------------------------ | ---------------------- | ----------- | -------------- | ------------- | ------------------------------------------------------------ |
-| T001    | Set up project structure and development environment                           | Project Setup          | Completed   | 20 Aug         | Yes           | Lovable project / Git commit                                 |
-| T002    | Design application navigation and overall UI structure                         | Frontend               | Completed   | 20 Aug         | Yes           | Lovable project / UI screens                                 |
-| T003    | Create authentication and login interface                                      | Authentication         | Completed   | 21 Aug         | Yes           | Authentication screen / Git commit                           |
-| T004    | Create inventory management dashboard                                          | Frontend               | Completed   | 21 Aug         | Yes           | Dashboard screen                                             |
-| T005    | Implement product/inventory data structure                                     | Database               | Completed   | 22 Aug         | Yes           | Database schema / Git commit                                 |
-| T006    | Implement product creation and editing functionality                           | Backend/API            | Completed   | 22 Aug         | Yes           | Application functionality / Git commit                       |
-| T007    | Implement stock quantity tracking                                              | Backend/Algorithm      | Completed   | 23 Aug         | Yes           | Stock management functionality                               |
-| T008    | Implement low-stock identification and alerts                                  | Backend/Algorithm      | Completed   | 23 Aug         | Yes           | Low-stock dashboard / Git commit                             |
-| T009    | Implement inventory search and filtering                                       | Frontend               | Completed   | 23 Aug         | Yes           | Search/filter functionality                                  |
-| T010    | Create dashboard statistics and inventory summaries                            | Frontend/Analytics     | Completed   | 24 Aug         | Yes           | Dashboard statistics                                         |
-| T011    | Connect frontend components with backend/database                              | Integration            | Completed   | 24 Aug         | Yes           | Application/database integration                             |
-| T012    | Test product addition, editing and stock updates                               | Testing                | Completed   | 24 Aug         | Yes           | Test results / application demo                              |
-| T013    | Test authentication and user access                                            | Testing/Authentication | Completed   | 24 Aug         | Yes           | Authentication test                                          |
-| T014    | Improve responsive UI and fix interface issues                                 | Frontend/UI            | Completed   | 25 Aug         | Yes           | Updated published application                                |
-| T015    | Deploy and publish Smart Stock Savvy                                           | Deployment             | Completed   | 25 Aug         | Yes           | Published URL                                                |
-| T016    | Prepare cloud deployment architecture for large-scale usage                    | Cloud Architecture     | Completed   | 25 Aug         | Yes           | architecture.md                                              |
-| T017    | Document current architecture and proposed AWS architecture                    | Documentation          | Completed   | 25 Aug         | Yes           | architecture.md                                              |
-| T018    | Final system testing and verification                                          | Testing                | Completed   | 25 Aug         | Yes           | Final published application                                  |
-| T019    | Develop and integrate Retail Intelligence Agent for inventory decision support | AI / Application Logic | Completed   | 10 Sep         | Yes           | `retail-agent.ts`, `retail-agent.tsx`, App Shell integration |
-| T020    | Review remaining issues and improvements                                       | Testing/QA             | In Progress | —              | Yes           | Issue list / project review                                  |
-| T021    | Final documentation and submission preparation                                 | Documentation          | In Progress | —              | Yes           | Project documentation                                        |
-| Task ID | Task                                                                    | Component               | Status      | Date Completed | AI Assistance | Evidence                       |
-| T022    | Configure Supabase project and PostgreSQL database                      | Backend/Database        | Completed   | 22 Aug         | Yes           | Supabase project / database    |
-| T023    | Create organizations and user profile tables                            | Database                | Completed   | 22 Aug         | Yes           | Database schema                |
-| T024    | Implement organization membership and user roles                        | Authentication/Database | Completed   | 23 Aug         | Yes           | `org_members` / RLS            |
-| T025    | Implement Row-Level Security policies                                   | Database/Security       | Completed   | 23 Aug         | Yes           | RLS policies                   |
-| T026    | Create products and suppliers database relationships                    | Database                | Completed   | 23 Aug         | Yes           | Database schema                |
-| T027    | Implement stock movement database structure                             | Database                | Completed   | 23 Aug         | Yes           | `stock_movements` table        |
-| T028    | Implement purchase order database structure                             | Database                | Completed   | 24 Aug         | Yes           | Purchase order tables          |
-| T029    | Implement stock IN/OUT business logic                                   | Backend/Algorithm       | Completed   | 24 Aug         | Yes           | Stock movement functionality   |
-| T030    | Implement reorder-level and stock-risk logic                            | Backend/Algorithm       | Completed   | 24 Aug         | Yes           | Inventory logic                |
-| T031    | Implement supplier management functionality                             | Frontend/Backend        | Completed   | 25 Aug         | Yes           | Supplier interface             |
-| T032    | Implement stock request workflow                                        | Frontend/Backend        | Completed   | 25 Aug         | Yes           | Stock request interface        |
-| T033    | Implement request status tracking                                       | Frontend/Backend        | Completed   | 25 Aug         | Yes           | My Requests page               |
-| T034    | Implement inventory data fetching from Supabase                         | Integration             | Completed   | 26 Aug         | Yes           | Supabase queries               |
-| T035    | Implement real-time inventory updates                                   | Backend/Integration     | Completed   | 26 Aug         | Yes           | Supabase Realtime              |
-| T036    | Implement loading, validation and error states                          | Frontend                | Completed   | 27 Aug         | Yes           | UI screens                     |
-| T037    | Test role-based access for users                                        | Security/Testing        | Completed   | 27 Aug         | Yes           | Authentication tests           |
-| T038    | Test inventory transaction accuracy                                     | Testing                 | Completed   | 28 Aug         | Yes           | Test results                   |
-| T039    | Test stock request workflow end-to-end                                  | Testing                 | Completed   | 28 Aug         | Yes           | Workflow test                  |
-| T040    | Test supplier and purchase order workflow                               | Testing                 | Completed   | 29 Aug         | Yes           | Test results                   |
-| T041    | Integrate inventory recommendation logic with Retail Intelligence Agent | AI/Application Logic    | Completed   | 10 Sep         | Yes           | `retail-agent.ts`              |
-| T042    | Connect Retail Intelligence Agent to application interface              | Frontend/AI Integration | Completed   | 10 Sep         | Yes           | `retail-agent.tsx` / App Shell |
-| T043    | Test Retail Intelligence Agent with inventory scenarios                 | AI/Testing              | Completed   | 10 Sep         | Yes           | Agent test cases               |
-| T044    | Validate agent recommendations against inventory data                   | AI/Testing              | Completed   | 10 Sep         | Yes           | Agent responses                |
-| T045    | Review application security and access controls                         | Security/QA             | Completed   | 10 Sep         | Yes           | Security review                |
-| T046    | Review application performance and scalability requirements             | Cloud/Scalability       | Completed   | 10 Sep         | Yes           | Scalability analysis           |
-| T047    | Prepare 1-million-user scalability architecture                         | Cloud Architecture      | Completed   | 10 Sep         | Yes           | `architecture.md`              |
-| T048    | Prepare 5-million-user scalability architecture                         | Cloud Architecture      | Completed   | 10 Sep         | Yes           | `architecture.md`              |
-| T049    | Prepare database and ER documentation                                   | Documentation           | Completed   | 10 Sep         | Yes           | `database.md`                  |
-| T050    | Compile final implementation evidence                                   | Documentation/QA        | In Progress | —              | Yes           | Screenshots / commits          |
-| T051    | Conduct final demonstration testing                                     | Testing                 | In Progress | —              | Yes           | Final test checklist           |
-| T052    | Finalize technical documentation and submission                         | Documentation           | In Progress | —              | Yes           | Final submission               |
+| Task ID | Task | Component | Assigned To | Status | Completed By | Date Completed | AI Assistance | Evidence |
+|---|---|---|---|---|---|---|---|---|
+| T001 | Set up project structure and development environment | Project Setup | Sujishnu | Completed | Sujishnu | 20 Aug | Yes | Lovable project / Git commit |
+| T002 | Design application navigation and overall UI structure | Frontend | Sujishnu | Completed | Sujishnu | 20 Aug | Yes | Lovable project / UI screens |
+| T003 | Create authentication and login interface | Authentication | Eeshani | Completed | Eeshani | 21 Aug | Yes | Authentication screen / Git commit |
+| T004 | Create inventory management dashboard | Frontend | Sujishnu | Completed | Sujishnu | 21 Aug | Yes | Dashboard screen |
+| T005 | Implement product/inventory data structure | Database | Eeshani | Completed | Eeshani | 22 Aug | Yes | Database schema / Git commit |
+| T006 | Implement product creation and editing functionality | Backend/API | Eeshani, Raibat | Completed | Eeshani, Raibat | 22 Aug | Yes | Application functionality / Git commit |
+| T007 | Implement stock quantity tracking | Backend/Algorithm | Raibat | Completed | Raibat | 23 Aug | Yes | Stock management functionality |
+| T008 | Implement low-stock identification and alerts | Backend/Algorithm | Raibat | Completed | Raibat | 23 Aug | Yes | Low-stock dashboard / Git commit |
+| T009 | Implement inventory search and filtering | Frontend | Sujishnu | Completed | Sujishnu | 23 Aug | Yes | Search/filter functionality |
+| T010 | Create dashboard statistics and inventory summaries | Frontend/Analytics | Sujishnu, Shrinjini | Completed | Sujishnu, Shrinjini | 24 Aug | Yes | Dashboard statistics |
+| T011 | Connect frontend components with backend/database | Integration | Shrinjini | Completed | Shrinjini | 24 Aug | Yes | Application/database integration |
+| T012 | Test product addition, editing and stock updates | Testing | Shrinjini | Completed | Shrinjini | 24 Aug | Yes | Test results / application demo |
+| T013 | Test authentication and user access | Testing/Authentication | Shrinjini, Eeshani | Completed | Shrinjini, Eeshani | 24 Aug | Yes | Authentication test |
+| T014 | Improve responsive UI and fix interface issues | Frontend/UI | Shrinjini, Sujishnu | Completed | Shrinjini, Sujishnu | 25 Aug | Yes | Updated published application |
+| T015 | Deploy and publish Smart Stock Savvy | Deployment | Shrinjini, Sujishnu | Completed | Shrinjini, Sujishnu | 25 Aug | Yes | Published URL |
+| T016 | Prepare cloud deployment architecture for large-scale usage | Cloud Architecture | Thiruharan | Completed | Thiruharan | 25 Aug | Yes | architecture.md |
+| T017 | Document current architecture and proposed AWS architecture | Documentation | Thiruharan | Completed | Thiruharan | 25 Aug | Yes | architecture.md |
+| T018 | Final system testing and verification | Testing | Shrinjini | Completed | Shrinjini | 25 Aug | Yes | Final published application |
+| T019 | Develop and integrate Retail Intelligence Agent for inventory decision support | AI / Application Logic | Shrinjini | Completed | Shrinjini | 10 Sep | Yes | `retail-agent.ts`, `retail-agent.tsx`, App Shell integration |
+| T020 | Review remaining issues and improvements | Testing/QA | Shrinjini | In Progress | — | — | Yes | Issue list / project review |
+| T021 | Final documentation and submission preparation | Documentation | Shrinjini, Thiruharan | In Progress | — | — | Yes | Project documentation |
+| T022 | Configure Supabase project and PostgreSQL database | Backend/Database | Eeshani | Completed | Eeshani | 22 Aug | Yes | Supabase project / database |
+| T023 | Create organizations and user profile tables | Database | Eeshani | Completed | Eeshani | 22 Aug | Yes | Database schema |
+| T024 | Implement organization membership and user roles | Authentication/Database | Eeshani | Completed | Eeshani | 23 Aug | Yes | `org_members` / RLS |
+| T025 | Implement Row-Level Security policies | Database/Security | Eeshani | Completed | Eeshani | 23 Aug | Yes | RLS policies |
+| T026 | Create products and suppliers database relationships | Database | Eeshani | Completed | Eeshani | 23 Aug | Yes | Database schema |
+| T027 | Implement stock movement database structure | Database | Eeshani | Completed | Eeshani | 23 Aug | Yes | `stock_movements` table |
+| T028 | Implement purchase order database structure | Database | Eeshani | Completed | Eeshani | 24 Aug | Yes | Purchase order tables |
+| T029 | Implement stock IN/OUT business logic | Backend/Algorithm | Raibat | Completed | Raibat | 24 Aug | Yes | Stock movement functionality |
+| T030 | Implement reorder-level and stock-risk logic | Backend/Algorithm | Raibat | Completed | Raibat | 24 Aug | Yes | Inventory logic |
+| T031 | Implement supplier management functionality | Frontend/Backend | Sujishnu, Eeshani | Completed | Sujishnu, Eeshani | 25 Aug | Yes | Supplier interface |
+| T032 | Implement stock request workflow | Frontend/Backend | Sujishnu, Eeshani | Completed | Sujishnu, Eeshani | 25 Aug | Yes | Stock request interface |
+| T033 | Implement request status tracking | Frontend/Backend | Sujishnu | Completed | Sujishnu | 25 Aug | Yes | My Requests page |
+| T034 | Implement inventory data fetching from Supabase | Integration | Shrinjini, Eeshani | Completed | Shrinjini, Eeshani | 26 Aug | Yes | Supabase queries |
+| T035 | Implement real-time inventory updates | Backend/Integration | Eeshani | Completed | Eeshani | 26 Aug | Yes | Supabase Realtime |
+| T036 | Implement loading, validation and error states | Frontend | Sujishnu | Completed | Sujishnu | 27 Aug | Yes | UI screens |
+| T037 | Test role-based access for users | Security/Testing | Shrinjini, Eeshani | Completed | Shrinjini, Eeshani | 27 Aug | Yes | Authentication tests |
+| T038 | Test inventory transaction accuracy | Testing | Shrinjini | Completed | Shrinjini | 28 Aug | Yes | Test results |
+| T039 | Test stock request workflow end-to-end | Testing | Shrinjini | Completed | Shrinjini | 28 Aug | Yes | Workflow test |
+| T040 | Test supplier and purchase order workflow | Testing | Shrinjini | Completed | Shrinjini | 29 Aug | Yes | Test results |
+| T041 | Integrate inventory recommendation logic with Retail Intelligence Agent | AI/Application Logic | Shrinjini, Raibat | Completed | Shrinjini, Raibat | 10 Sep | Yes | `retail-agent.ts` |
+| T042 | Connect Retail Intelligence Agent to application interface | Frontend/AI Integration | Shrinjini | Completed | Shrinjini | 10 Sep | Yes | `retail-agent.tsx` / App Shell |
+| T043 | Test Retail Intelligence Agent with inventory scenarios | AI/Testing | Shrinjini | Completed | Shrinjini | 10 Sep | Yes | Agent test cases |
+| T044 | Validate agent recommendations against inventory data | AI/Testing | Raibat | Completed | Raibat | 10 Sep | Yes | Agent responses |
+| T045 | Review application security and access controls | Security/QA | Eeshani, Shrinjini | Completed | Eeshani, Shrinjini | 10 Sep | Yes | Security review |
+| T046 | Review application performance and scalability requirements | Cloud/Scalability | Thiruharan | Completed | Thiruharan | 10 Sep | Yes | Scalability analysis |
+| T047 | Prepare 1-million-user scalability architecture | Cloud Architecture | Thiruharan | Completed | Thiruharan | 10 Sep | Yes | `architecture.md` |
+| T048 | Prepare 5-million-user scalability architecture | Cloud Architecture | Thiruharan | Completed | Thiruharan | 10 Sep | Yes | `architecture.md` |
+| T049 | Prepare database and ER documentation | Documentation | Eeshani, Thiruharan | Completed | Eeshani, Thiruharan | 10 Sep | Yes | `database.md` |
+| T050 | Compile final implementation evidence | Documentation/QA | Shrinjini | In Progress | — | — | Yes | Screenshots / commits |
+| T051 | Conduct final demonstration testing | Testing | Shrinjini | In Progress | — | — | Yes | Final test checklist |
+| T052 | Finalize technical documentation and submission | Documentation | Shrinjini, Thiruharan | In Progress | — | — | Yes | Final submission |
+| T053 | **Live organization-isolation (RLS) verification:** created two brand-new separate workspaces with distinct test accounts, added distinct test products/suppliers/purchase orders to each, and confirmed from Workspace A's session that Workspace B's data was invisible in the UI, not listed in the workspace switcher, and could not be read or modified via direct requests; confirmed an unauthenticated request was rejected; confirmed a staff-role test user could record stock movements (stock correctly updated 4 → 2 on a sale, triggering a correct high-priority reorder suggestion) but was correctly blocked from adding suppliers/purchase orders. **One gap found during this test:** a staff-role user could also create products, which should have been owner/manager-only — see T054 for the fix and re-verification | Security / Testing | Shrinjini | Completed | Shrinjini | 14 Sep 2026 | Yes (test executed with AI agent assistance; reviewed and confirmed by Shrinjini) | Isolation-test screenshots/log (attach to evidence folder) |
+| T054 | **Fix for the gap found in T053:** restricted product creation (add / import / delete) to `owner`/`manager` roles only, both in the Supabase RLS policy on `products` and in the Settings page UI (staff now see an explanatory note instead of the product forms); stock-movement recording was deliberately left open to all workspace members and re-confirmed still working after the change | Database/Security, Frontend | Shrinjini | Completed | Shrinjini | 14 Sep 2026 | Yes (fix implemented with AI assistance; applied and re-verified by Shrinjini) | Updated RLS policy on `products`; updated Settings page; re-tested with the T053 staff test account — product creation now blocked, stock-movement recording still succeeds |
 
+---
 
 # Work Log Details
 
@@ -228,6 +230,29 @@ This includes reviewing the architecture documentation, implementation work log,
 
 **Primary contribution:** Shrinjini and Thiruharan, with relevant technical inputs from all team members.
 
+### T053 — Organization Isolation (RLS) Verification
+
+Two brand-new test accounts and two separate workspaces ("companies") were created through the normal sign-up flow, each seeded with its own distinctly-named products and suppliers. From Workspace A's authenticated session:
+
+* The inventory page showed only Workspace A's own items; Workspace B's items never appeared, including in the workspace switcher.
+* Every attempted read, edit, or write against Workspace B's data from Workspace A's session was blocked or returned nothing; Workspace B's stock was confirmed unchanged afterward.
+* A request made with no authentication was rejected.
+* A staff-role test user was correctly blocked from adding suppliers or purchase orders, but was allowed to record stock movements — a sale correctly reduced stock from 4 to 2 units, and the reorder engine correctly produced a high-priority replenishment suggestion in response.
+* **Gap found:** the same staff-role test user was still able to create new products, which is a manager/admin-level operation and should have been blocked. See T054.
+
+**Primary contribution:** Shrinjini — the test itself was executed with AI agent assistance, but Shrinjini directed the test and is responsible for being able to explain the result and methodology in the viva.
+
+### T054 — Restrict Product Creation to Owner/Manager
+
+Following the gap identified in T053, product creation (adding, importing, or deleting products) was restricted to `owner`/`manager` roles:
+
+* The Supabase Row-Level Security policy governing writes to the `products` table was updated so only `owner`/`manager` roles can insert/update/delete rows; all workspace members can still read.
+* The Settings page now shows staff-role users a short explanatory note in place of the add/import/delete product forms.
+* Stock-movement recording (receipts, sales, waste, adjustments) was deliberately left open to all workspace members, since that is a day-to-day staff-level transaction, not a catalog-management operation.
+* Re-tested with the same staff test account from T053: product creation is now blocked, and stock-movement recording still succeeds.
+
+**Primary contribution:** Shrinjini.
+
 ---
 
 # AI Assistance Record
@@ -245,6 +270,7 @@ AI tools were used during development for activities including:
 * Improving technical documentation.
 * Designing the proposed cloud architecture.
 * Assisting with testing and issue identification.
+* Executing and reporting on the live organization-isolation (RLS) test and the subsequent product-creation access-control fix (T053, T054).
 
 AI-generated suggestions were reviewed, tested and adapted by the team before being incorporated into the project. AI tools were used as development assistance and did not replace team verification or technical decision-making.
 
@@ -273,7 +299,9 @@ The core Smart Stock Savvy application has been implemented and published. The m
 
 A Retail Intelligence Agent has also been integrated into the application to provide inventory-focused decision support using the system's existing business and inventory data.
 
-Final issue review, documentation verification, evidence collection and submission preparation remain in progress.
+Organization-level data isolation (Row-Level Security) has been verified end-to-end with a live two-workspace test (T053), and a resulting access-control gap in product creation has been identified and fixed (T054).
+
+Final issue review, documentation verification, evidence collection, and submission preparation remain in progress.
 
 ---
 
@@ -357,10 +385,10 @@ The project responsibilities are divided among the five students as follows:
 
 # Worklog Summary
 
-| Student        | Primary Responsibility                                                         |
-| -------------- | ------------------------------------------------------------------------------ |
-| **Sujishnu**   | Frontend / Staff Interface                                                     |
-| **Eeshani**    | Backend / Database / Authentication                                            |
-| **Raibat**     | Inventory / Stock Management & Business Logic                                  |
-| **Thiruharan** | Architecture / Deployment / Scalability                                        |
-| **Shrinjini**  | Integration / Retail Intelligence Agent / Testing / UI-UX / Documentation / QA |
+| Student | Primary Responsibility |
+|---|---|
+| **Sujishnu** | Frontend / Staff Interface |
+| **Eeshani** | Backend / Database / Authentication |
+| **Raibat** | Inventory / Stock Management & Business Logic |
+| **Thiruharan** | Architecture / Deployment / Scalability |
+| **Shrinjini** | Integration / Retail Intelligence Agent / Testing / UI-UX / Documentation / QA |
