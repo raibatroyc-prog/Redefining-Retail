@@ -1,9 +1,9 @@
-# Smart Stock Savvy
+# Redefining Retail
 
 <img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/3af9b2b4-ac67-4706-b5ec-793a29dcf161" />
 
 
-**Smart Stock Savvy** is a modern inventory management platform designed to help retail organizations monitor stock, understand inventory risks, evaluate suppliers, and make informed purchasing decisions.
+**Redefining Retail** is a modern inventory management platform designed to help retail organizations monitor stock, understand inventory risks, evaluate suppliers, and make informed purchasing decisions.
 
 The platform combines inventory management with deterministic analytics and a controlled AI assistant, allowing users to turn inventory data into clear and useful insights.
 
